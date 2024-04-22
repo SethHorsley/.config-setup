@@ -15,7 +15,7 @@ echo "Installing autoenv"
 curl -#fLo- 'https://raw.githubusercontent.com/hyperupcall/autoenv/master/scripts/install.sh' | sh
 
 ## utils functions
-source ./utils.sh
+source ./bin/utils.sh
 
 ## install plugins
 echo "Installing zsh plugins"
