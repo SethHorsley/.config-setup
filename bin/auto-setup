@@ -34,13 +34,13 @@ cd ~/files/hub/iseth
 
 git clone git@github.com:iseth/.config-setup.git
 
+cd .config-setup
+
 source ./bin/brew-setup
 source ./bin/utils.sh
 
 # we have to add it now because the helper functions are in the .config-setup repo
 check_if_installed_or_install 'eval "$(/opt/homebrew/bin/brew shellenv)"' "~/.zshrc"
-
-cd .config-setup
 
 install_taps
 install_essential_packages
