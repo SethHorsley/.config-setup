@@ -62,9 +62,7 @@ if [[ $? -ne 0 ]]; then
 fi
 echo "SSH Key Location: $ssh_key_location"
 
-ssh_key=$(op read "$ssh_key_location")
-echo $ssh_key > ~/.ssh/id_rsa
-chmod 600 ~/.ssh/id_rsa
+op read --out-file ~/.ssh/id_rsa "$ssh_key_location"
 echo "SSH Key added to ~/.ssh/id_rsa"
 
 # Add the SSH key to the SSH agent
