@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-source ./utils.sh
-
 ## install oh my zsh
 echo "Installing oh-my-zsh"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -15,6 +13,9 @@ source ~/.zshrc
 ## install autoenv
 echo "Installing autoenv"
 curl -#fLo- 'https://raw.githubusercontent.com/hyperupcall/autoenv/master/scripts/install.sh' | sh
+
+## utils functions
+source ./utils.sh
 
 ## install plugins
 echo "Installing zsh plugins"

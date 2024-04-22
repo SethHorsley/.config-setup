@@ -1,5 +1,6 @@
 taps:
   - homebrew/cask-fonts
+  - FelixKratz/formulae
 
 essential:
   packages:
