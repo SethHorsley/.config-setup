@@ -55,7 +55,7 @@ echo "Email: $email"
 op account add --address my.1password.com --email $email
 eval $(op signin --account my)
 
-ssh_key_location=$(decrypt_string_with_pass "U2FsdGVkX1+MHd8z/1or3ZBjwl1ZVsfFI5VZNTryqcF48Cd3Rc8b6SM27GUX81gN bF7TE43i267Vldfh3k3x8L57MfAT3TTIJScyF2sfOS9JPaf+OgmwACdAi2vbC9uM")
+ssh_key_location=$(decrypt_string_with_pass "U2FsdGVkX1/ErNE4sAo/e5snN1SSpxczOsT7+OHGFC09VFII9gr8kYS4pe5+muEo GOAEFyVIoiOqa3WUWd5yls42csT8qqd3wLJdwI5dX/bKOFBwAGleou1+e0G038iQ aBn3zC8rI+8JemD20tNiUw==")
 if [[ $? -ne 0 ]]; then
 	echo "Failed to decrypt SSH key location, exiting."
 	exit 1
@@ -64,8 +64,9 @@ echo "SSH Key Location: $ssh_key_location"
 
 ssh_key=$(op read "$ssh_key_location")
 echo "SSH Key: "
-echo $ssh_key > ~/.ssh/id_rsa
-chmod 600 ~/.ssh/id_rsa
+echo "$ssh_key"
+# echo $ssh_key > ~/.ssh/id_rsa
+# chmod 600 ~/.ssh/id_rsa
 
 echo "SSH Key added to ~/.ssh/id_rsa"
 
