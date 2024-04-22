@@ -21,17 +21,20 @@ brew install yq
 brew install --cask 1password
 brew install 1password-cli
 
-op account add --address my.1password.com
+# Install private keys
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/iseth/.config-setup/main/bin/private-keys.sh)"
 
-source ./bin/brew-setup
-source ./bin/utils.sh
-
-check_if_installed_or_install 'eval "$(/opt/homebrew/bin/brew shellenv)"' "~/.zshrc"
 mkdir -p ~/files/hub/iseth
 
 cd ~/files/hub/iseth
 
 git clone git@github.com:iseth/.config-setup.git
+
+source ./bin/brew-setup
+source ./bin/utils.sh
+
+# we have to add it now because the helper functions are in the .config-setup repo
+check_if_installed_or_install 'eval "$(/opt/homebrew/bin/brew shellenv)"' "~/.zshrc"
 
 cd .config-setup
 
