@@ -44,28 +44,30 @@ decrypt_string_with_pass() {
 	decrypt_string "$string_to_decrypt" "$password" || exit $? # Exit the script if decryption fails
 }
 
-prompt_for_password
-email=$(decrypt_string_with_pass "U2FsdGVkX1+4h48f0i4MqR4tYA9tzNzy2h+Q0/LWfiA=")
-if [[ $? -ne 0 ]]; then
-	echo "Failed to decrypt email, exiting."
-	exit 1
-fi
-echo "Email: $email"
+if [ ! -f "$HOME/.ssh/id_rsa" ]; then
+	prompt_for_password
 
-op account add --address my.1password.com --email $email
-eval $(op signin --account my)
+	email=$(decrypt_string_with_pass "U2FsdGVkX1+4h48f0i4MqR4tYA9tzNzy2h+Q0/LWfiA=")
+	if [[ $? -ne 0 ]]; then
+		echo "Failed to decrypt email, exiting."
+		exit 1
+	fi
+	echo "Email: $email"
 
-ssh_key_location=$(decrypt_string_with_pass "U2FsdGVkX1/ErNE4sAo/e5snN1SSpxczOsT7+OHGFC09VFII9gr8kYS4pe5+muEo GOAEFyVIoiOqa3WUWd5yls42csT8qqd3wLJdwI5dX/bKOFBwAGleou1+e0G038iQ aBn3zC8rI+8JemD20tNiUw==")
-if [[ $? -ne 0 ]]; then
-	echo "Failed to decrypt SSH key location, exiting."
-	exit 1
-fi
-echo "SSH Key Location: $ssh_key_location"
+	op account add --address my.1password.com --email $email
+	eval $(op signin --account my)
 
-op read --out-file ~/.ssh/id_rsa "$ssh_key_location"
-echo "SSH Key added to ~/.ssh/id_rsa"
+	ssh_key_location=$(decrypt_string_with_pass "U2FsdGVkX1/ErNE4sAo/e5snN1SSpxczOsT7+OHGFC09VFII9gr8kYS4pe5+muEo GOAEFyVIoiOqa3WUWd5yls42csT8qqd3wLJdwI5dX/bKOFBwAGleou1+e0G038iQ aBn3zC8rI+8JemD20tNiUw==")
+	if [[ $? -ne 0 ]]; then
+		echo "Failed to decrypt SSH key location, exiting."
+		exit 1
+	fi
+	echo "SSH Key Location: $ssh_key_location"
+
+	op read --out-file ~/.ssh/id_rsa "$ssh_key_location"
+	echo "SSH Key added to ~/.ssh/id_rsa"
 
 # Add the SSH key to the SSH agent
 # eval $(ssh-agent)
 # ssh-add ~/.ssh/id_rsa
-
+fi

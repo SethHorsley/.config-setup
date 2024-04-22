@@ -46,16 +46,26 @@ install_taps
 install_essential_packages
 
 confirm_action "Installing oh my zsh and plugins"
-./bin/shell-setup
+if [ $? -eq 0 ]; then
+	./bin/shell-setup
+fi
 
 confirm_action "Installing asdf and languages"
-./bin/asdf-setup
+if [ $? -eq 0 ]; then
+	./bin/asdf-setup
+fi
 
 confirm_action "Installing .config-setup"
-./bin/config-setup
+if [ $? -eq 0 ]; then
+	./bin/config-setup
+fi
 
 confirm_action "Installing general packages."
-install_gen_packages
+if [ $? -eq 0 ]; then
+	install_gen_packages
+fi
 
 confirm_action "Installing general casks."
-install_gen_casks
+if [ $? -eq 0 ]; then
+	install_gen_casks
+fi

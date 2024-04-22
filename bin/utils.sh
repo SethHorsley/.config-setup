@@ -6,12 +6,29 @@ confirm_action() {
 	local user_response
 
 	echo "$prompt_message"
-	read -p "Do you want to continue? (y/n): " user_response
+	read -p "Do you want to continue? (y/n/q): " user_response
 
-	if [[ ! $user_response =~ ^[Yy]$ ]]; then
-		echo "Action aborted by the user."
-		exit 1 # Exit script if the user does not confirm
-	fi
+	case "$user_response" in
+	[Yy])
+		# If user says 'Yes', just return and continue the script execution
+		return
+		;;
+	[Nn])
+		# If user says 'No', skip this action and continue with the next
+		echo "Action skipped by the user."
+		return 1
+		;;
+	[Qq])
+		# If user says 'Quit', exit the script entirely
+		echo "Exiting script as requested by the user."
+		exit 1
+		;;
+	*)
+		# Handle unexpected input
+		echo "Invalid response. Exiting now."
+		exit 1
+		;;
+	esac
 }
 
 # Function to check if a string is in a file, and append it if not present
