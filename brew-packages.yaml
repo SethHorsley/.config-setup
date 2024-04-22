@@ -19,6 +19,9 @@ essential:
     - fzf
     - eza
 
+  casks:
+    - iterm2
+
 general:
   packages:
     - neofetch
@@ -31,7 +34,6 @@ general:
   casks:
     - little-snitch
     - raycast
-    - iterm2
     - livebook
     - discord
     - karabiner-elements
