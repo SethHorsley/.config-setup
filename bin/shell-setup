@@ -12,7 +12,7 @@ source ~/.zshrc
 
 ## install autoenv
 echo "Installing autoenv"
-curl -#fLo- 'https://raw.githubusercontent.com/hyperupcall/autoenv/master/scripts/install.sh' | sh
+check_if_installed_or_install "source $(brew --prefix autoenv)/activate.sh" "~/.zshrc"
 
 ## utils functions
 source ./bin/utils.sh

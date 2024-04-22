@@ -1,6 +1,7 @@
 #!/bin/bash
 
-source ./utils.sh
+## utils functions
+source ./bin/utils.sh
 
 git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.14.0
 
@@ -31,4 +32,3 @@ asdf global lua latest
 asdf plugin add golang https://github.com/asdf-community/asdf-golang.git
 asdf install golang latest
 asdf global golang latest
-

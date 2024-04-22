@@ -26,6 +26,7 @@ general:
     - yt-dlp
     - overmind
     - nmap
+    - autoenv
 
   casks:
     - little-snitch
