@@ -3,22 +3,28 @@
 source ./utils.sh
 
 ## install oh my zsh
+echo "Installing oh-my-zsh"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 source ~/.zshrc
 
 ## install zinit plugin manager
+echo "Installing zinit"
 bash -c "$(curl --fail --show-error --silent --location https://raw.githubusercontent.com/zdharma-continuum/zinit/HEAD/scripts/install.sh)"
 source ~/.zshrc
 
 ## install autoenv
+echo "Installing autoenv"
 curl -#fLo- 'https://raw.githubusercontent.com/hyperupcall/autoenv/master/scripts/install.sh' | sh
 
 ## install plugins
+echo "Installing zsh plugins"
 check_if_installed_or_install "zinit load zdharma/history-search-multi-word" "~/.zshrc"
 check_if_installed_or_install "zinit load zsh-users/zsh-autosuggestions" "~/.zshrc"
 check_if_installed_or_install "zinit load zsh-users/zsh-syntax-highlighting" "~/.zshrc"
 check_if_installed_or_install "zinit load mfaerevaag/wd" "~/.zshrc"
 
+## install zsh snippets and aliases
+echo "Installing zsh snippets and aliases"
 check_if_installed_or_install "zinit snippet 'https://github.com/robbyrussell/oh-my-zsh/raw/master/plugins/git/git.plugin.zsh'" "~/.zshrc"
 check_if_installed_or_install "alias rmdocker='docker rm -f \$(docker ps -aq)'" "~/.zshrc"
 check_if_installed_or_install "alias r='bin/rails'" "~/.zshrc"
@@ -47,3 +53,5 @@ check_if_installed_or_install 'function rm () {
   mkdir -p /tmp/trash
   mv "$@" /tmp/trash
 }' "~/.zshrc"
+
+echo "Done installing zsh plugins and snippets"
