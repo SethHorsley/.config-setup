@@ -3,6 +3,7 @@
 ## utils functions
 source ./bin/utils.sh
 
+echo "installing asdf"
 git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.14.0
 
 check_if_installed_or_install '. "$HOME/.asdf/asdf.sh"' "~/.zshrc"
@@ -12,23 +13,29 @@ source ~/.zshrc
 asdf plugin add erlang https://github.com/asdf-vm/asdf-erlang.git
 asdf install erlang latest
 asdf global erlang latest
+echo "erlang is installed"
 
 asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git
 asdf install elixir latest
 asdf global elixir latest
+echo "elixir is installed"
 
 asdf plugin add ruby https://github.com/asdf-vm/asdf-ruby.git
 asdf install ruby latest
 asdf global ruby latest
+echo "ruby is installed"
 
 asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
 asdf install nodejs latest
 asdf global nodejs latest
+echo "nodejs is installed"
 
 asdf plugin-add lua https://github.com/Stratus3D/asdf-lua.git
 asdf install lua latest
 asdf global lua latest
+echo "lua is installed"
 
 asdf plugin add golang https://github.com/asdf-community/asdf-golang.git
 asdf install golang latest
 asdf global golang latest
+echo "golang is installed"

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Source directory containing the config files
-SOURCE_DIR="/Users/send/files/hub/iseth/config-setup/.config"
+SOURCE_DIR="./.config"
 
 # Target directory where symlinks will be placed
 TARGET_DIR="$HOME/.config"
@@ -11,8 +11,8 @@ mkdir -p "$TARGET_DIR"
 
 # Loop through all items in the source directory and create symlinks
 for item in "$SOURCE_DIR"/*; do
-    ln -sf "$item" "$TARGET_DIR/"
-    echo "Linked $item to $TARGET_DIR/"
+	ln -sf "$item" "$TARGET_DIR/"
+	echo "Linked $item to $TARGET_DIR/"
 done
 
 echo "All applicable items have been linked."
