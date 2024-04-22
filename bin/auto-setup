@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-source ./bin/brew-setup
-source ./bin/utils.sh
-
 ## Check for Homebrew and install it if we don't have it
 if test ! $(which brew); then
 	if test ! $(which xcode-select); then
@@ -16,9 +13,7 @@ fi
 
 touch ~/.zshrc
 
-check_if_installed_or_install 'eval "$(/opt/homebrew/bin/brew shellenv)"' "~/.zshrc"
-
-source ~/.zshrc
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 brew update
 brew install yq
@@ -28,6 +23,10 @@ brew install 1password-cli
 
 op account add --address my.1password.com
 
+source ./bin/brew-setup
+source ./bin/utils.sh
+
+check_if_installed_or_install 'eval "$(/opt/homebrew/bin/brew shellenv)"' "~/.zshrc"
 mkdir -p ~/files/hub/iseth
 
 cd ~/files/hub/iseth
