@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+
+## Check for Homebrew and install it if we don't have it
+if test ! $(which brew); then
+  if test ! $(which xcode-select);  then
+      echo "xcode-select is not installed."
+      xcode-select --install
+  fi
+
+  echo "Installing homebrew..."
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
+brew update
+brew install yq
+
+brew install --cask 1password
+brew install 1password-cli
+
+op account add --address my.1password.com
+
+mkdir -p ~/files/hub/iseth
+
+cd ~/files/hub/iseth
+
+git clone git@github.com:iseth/.config-setup.git
+
+cd .config-setup
+
+source ./bin/brew-setup
+source ./bin/utils.sh
+
+install_taps
+install_essential_packages
+
+confirm_action "Installing oh my zsh and plugins"
+./bin/shell-setup
+
+confirm_action "Installing asdf and languages"
+./bin/asdf-setup
+
+confirm_action "Installing .config-setup"
+./bin/config-setup
+
+confirm_action "Installing general packages."
+install_gen_packages
+
+confirm_action "Installing general casks."
+install_gen_casks

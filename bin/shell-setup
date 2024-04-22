@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+
+source ./utils.sh
+
+## install oh my zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+source ~/.zshrc
+
+## install zinit plugin manager
+bash -c "$(curl --fail --show-error --silent --location https://raw.githubusercontent.com/zdharma-continuum/zinit/HEAD/scripts/install.sh)"
+source ~/.zshrc
+
+## install autoenv
+curl -#fLo- 'https://raw.githubusercontent.com/hyperupcall/autoenv/master/scripts/install.sh' | sh
+
+## install plugins
+check_if_installed_or_install "zinit load zdharma/history-search-multi-word" "~/.zshrc"
+check_if_installed_or_install "zinit load zsh-users/zsh-autosuggestions" "~/.zshrc"
+check_if_installed_or_install "zinit load zsh-users/zsh-syntax-highlighting" "~/.zshrc"
+check_if_installed_or_install "zinit load mfaerevaag/wd" "~/.zshrc"
+
+check_if_installed_or_install "zinit snippet 'https://github.com/robbyrussell/oh-my-zsh/raw/master/plugins/git/git.plugin.zsh'" "~/.zshrc"
+check_if_installed_or_install "alias rmdocker='docker rm -f \$(docker ps -aq)'" "~/.zshrc"
+check_if_installed_or_install "alias r='bin/rails'" "~/.zshrc"
+check_if_installed_or_install 'eval "$(fzf --zsh)"' "~/.zshrc"
+check_if_installed_or_install 'alias nvim-astro="NVIM_APPNAME=AstroNvim nvim"' "~/.zshrc"
+check_if_installed_or_install 'alias nvim-lazy="NVIM_APPNAME=LazyVim nvim"' "~/.zshrc"
+check_if_installed_or_install 'alias nvim-kick="NVIM_APPNAME=kickstart nvim"' "~/.zshrc"
+check_if_installed_or_install 'alias nvim-chad="NVIM_APPNAME=NvChad nvim"' "~/.zshrc"
+check_if_installed_or_install 'alias nvim-astro="NVIM_APPNAME=AstroNvim nvim"' "~/.zshrc"
+
+custom_func_snippet='function nvims() {
+  items=("default" "kickstart" "LazyVim" "NvChad" "AstroNvim")
+  config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config > " --height=~50% --layout=reverse --border --exit-0)
+  if [[ -z $config ]]; then
+    echo "Nothing selected"
+    return 0
+  elif [[ $config == "default" ]]; then
+    config=""
+  fi
+  NVIM_APPNAME=$config nvim $@
+}'
+
+check_if_installed_or_install "$custom_func_snippet" "~/.zshrc"
+
+check_if_installed_or_install 'function rm () {
+  mkdir -p /tmp/trash
+  mv "$@" /tmp/trash
+}' "~/.zshrc"
