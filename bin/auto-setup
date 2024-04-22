@@ -23,6 +23,10 @@ brew install 1password-cli
 
 # Install private keys
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/iseth/.config-setup/main/bin/private-keys-setup.sh)"
+if [[ $? -ne 0 ]]; then
+	echo "Error installing private keys. Exiting."
+	exit 1
+fi
 
 mkdir -p ~/files/hub/iseth
 
