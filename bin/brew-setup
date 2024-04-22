@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Path to the YAML file
-CONFIG_FILE="brew-packages.yml"
+CONFIG_FILE="brew-packages.yaml"
 
 # These function get data from the yml file
 #
@@ -83,6 +83,4 @@ install_gen_casks() {
       install_cask "$cask"
   done
 }
-
-echo "Installation complete."
 
