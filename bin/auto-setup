@@ -22,7 +22,7 @@ brew install --cask 1password
 brew install 1password-cli
 
 # Install private keys
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/iseth/.config-setup/main/bin/private-keys.sh)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/iseth/.config-setup/main/bin/private-keys-setup.sh)"
 
 mkdir -p ~/files/hub/iseth
 
