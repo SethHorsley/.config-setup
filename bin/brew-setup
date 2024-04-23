@@ -5,30 +5,30 @@ CONFIG_FILE="brew-packages.yaml"
 
 # These function get data from the yml file
 #
-# 
+#
 # Function to get Homebrew taps
 get_taps() {
-    yq eval '.taps[]' "$CONFIG_FILE"
+	yq eval '.taps[]' "$CONFIG_FILE"
 }
 
 # Function to get list of essential packages
 get_essential_packages() {
-    yq eval '.essential.packages[]' "$CONFIG_FILE"
+	yq eval '.essential.packages[]' "$CONFIG_FILE"
 }
 
 # Function to get list of essential packages
 get_essential_casks() {
-    yq eval '.essential.casks[]' "$CONFIG_FILE"
+	yq eval '.essential.casks[]' "$CONFIG_FILE"
 }
 
 # Function to get list of general packages
 get_gen_packages() {
-    yq eval '.general.packages[]' "$CONFIG_FILE"
+	yq eval '.general.packages[]' "$CONFIG_FILE"
 }
 
 # Function to get list of general packages
 get_gen_casks() {
-    yq eval '.general.casks[]' "$CONFIG_FILE"
+	yq eval '.general.casks[]' "$CONFIG_FILE"
 }
 
 # These functions perform brew actions
@@ -36,51 +36,58 @@ get_gen_casks() {
 #
 # Function to tap a Homebrew repository
 tap_brew() {
-  echo "Tapping $1..."
-  brew tap "$1"
+	echo "Tapping $1..."
+	brew tap "$1"
 }
 
 # Function to install a single Homebrew package
 install_package() {
-    echo "Installing package: $1"
-    brew install "$1"
+	echo "Installing package: $1"
+	brew install "$1"
 }
 
 # Function to install a single cask
 install_cask() {
-    echo "Installing cask: $1"
-    brew install --cask "$1"
+	echo "Installing cask: $1"
+	brew install --cask "$1"
 }
 
 # Tap necessary Homebrew repositories
 install_taps() {
-  echo "Tapping necessary Homebrew repositories..."
-  for tap in $(get_taps); do
-      tap_brew "$tap"
-  done
+	echo "Tapping necessary Homebrew repositories..."
+	for tap in $(get_taps); do
+		tap_brew "$tap"
+	done
 }
 
 install_essential_packages() {
-  # Install essential packages
-  echo "Installing essential Homebrew packages..."
-  for package in $(get_essential_packages); do
-      install_package "$package"
-  done
+	# Install essential packages
+	echo "Installing essential Homebrew packages..."
+	for package in $(get_essential_packages); do
+		install_package "$package"
+	done
+}
+
+install_essential_packages() {
+	# Install essential packages
+	echo "Installing essential Homebrew casks..."
+	for package in $(get_essential_casks); do
+		install_package "$package"
+	done
 }
 
 install_gen_packages() {
-  # Retrieve and install packages
-  echo "Installing general Homebrew packages..."
-  for package in $(get_gen_packages); do
-      install_package "$package"
-  done
+	# Retrieve and install packages
+	echo "Installing general Homebrew packages..."
+	for package in $(get_gen_packages); do
+		install_package "$package"
+	done
 }
 
 install_gen_casks() {
-  # Retrieve and install casks
-  echo "Installing general Homebrew casks..."
-  for cask in $(get_gen_casks); do
-      install_cask "$cask"
-  done
+	# Retrieve and install casks
+	echo "Installing general Homebrew casks..."
+	for cask in $(get_gen_casks); do
+		install_cask "$cask"
+	done
 }
-
