@@ -30,6 +30,11 @@ asdf install nodejs latest
 asdf global nodejs latest
 echo "nodejs is installed"
 
+asdf plugin-add python
+asdf install python latest
+asdf global python latest
+echo "python is installed"
+
 asdf plugin-add lua https://github.com/Stratus3D/asdf-lua.git
 asdf install lua latest
 asdf global lua latest

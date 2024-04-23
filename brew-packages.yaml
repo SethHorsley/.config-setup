@@ -17,7 +17,6 @@ essential:
     - htop
     - tmux
     - fzf
-    - eza
 
   casks:
     - iterm2
@@ -30,6 +29,8 @@ general:
     - overmind
     - nmap
     - autoenv
+    - nushell
+    - eza
 
   casks:
     - little-snitch
