@@ -1,18 +1,34 @@
 #!/usr/bin/env bash
 
-# Source directory containing the config files
-SOURCE_DIR="$(pwd)/dot-config"
-
-# Target directory where symlinks will be placed
-TARGET_DIR="$HOME/.config"
-
-# Create target directory if it does not exist
-mkdir -p "$TARGET_DIR"
-
 # Loop through all items in the source directory and create symlinks
-for item in "$SOURCE_DIR"/*; do
-	ln -sf "$item" "$TARGET_DIR/"
-	echo "Linked $item to $TARGET_DIR/"
-done
+config_files() {
+  # Source directory containing the config files
+  SOURCE_DIR="$(pwd)/dot-config-files"
+
+  # Target directory where symlinks will be placed
+  TARGET_DIR="$HOME/.config"
+
+  # Create target directory if it does not exist
+  mkdir -p "$TARGET_DIR"
+
+  for item in "$SOURCE_DIR"/*; do
+    ln -sf "$item" "$TARGET_DIR/"
+    echo "Linked $item to $TARGET_DIR/"
+  done
+}
+
+link_file() {
+  source_file=$1
+  target_file=$2
+  ln -sf "$source_file" "$target_file"
+  echo "Linked $source_file to $target_file"
+}
+
+home_dot_files() {
+  link_file "$(pwd)/home-dot-files/tmux.conf" "$HOME/.tmux.conf"
+}
+
+config_files
+home_dot_files
 
 echo "All applicable items have been linked."
